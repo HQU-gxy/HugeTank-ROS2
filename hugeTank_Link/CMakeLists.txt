@@ -33,6 +33,8 @@ find_package(std_msgs REQUIRED)
 # find_package(wheeltec_robot_msg REQUIRED)                         # CHANGE
 find_package(serial REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+find_package(urdf REQUIRED)
+
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -75,7 +77,7 @@ DESTINATION lib/${PROJECT_NAME}
 )
 
 install(
-  DIRECTORY launch config
+  DIRECTORY launch config urdf
   DESTINATION share/${PROJECT_NAME}
 )
 ament_package()

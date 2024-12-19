@@ -1,0 +1,81 @@
+<robot name="huge_tank">
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.92 0.42 0.4" />
+      </geometry>
+      <material name="base_link-material">
+        <color rgba="0.033104766565152086 0.46778379610254284 0.12477181755144427 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.92 0.42 0.4" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="base_link_to_track_left" type="continuous">
+    <parent link="base_link" />
+    <child link="track_left" />
+    <origin xyz="0 -0.2712470663644976 -0.05" rpy="0 0 0" />
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="track_left">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="1.06 0.12 0.35" />
+      </geometry>
+      <material name="track_left-material">
+        <color rgba="0.6375968739867731 0.04373502925049377 0.008023192982520563 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="1.06 0.12 0.35" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="1" />
+      <inertia ixx="0.16666666666666666" ixy="0" ixz="0" iyy="0.16666666666666666" iyz="0" izz="0.16666666666666666" />
+    </inertial>
+  </link>
+
+  <joint name="base_link_to_track_right" type="continuous">
+    <parent link="base_link" />
+    <child link="track_right" />
+    <origin xyz="0 0.27 -0.05" rpy="0 0 0" />
+    <axis xyz="0 0 1"/>
+  </joint>
+  
+  <link name="track_right">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="1.06 0.12 0.35" />
+      </geometry>
+      <material name="track_right-material">
+        <color rgba="0.6375968739867731 0.04373502925049377 0.008023192982520563 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="1.06 0.12 0.35" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="1" />
+      <inertia ixx="0.16666666666666666" ixy="0" ixz="0" iyy="0.16666666666666666" iyz="0" izz="0.16666666666666666" />
+    </inertial>
+  </link>
+ 
+</robot>
