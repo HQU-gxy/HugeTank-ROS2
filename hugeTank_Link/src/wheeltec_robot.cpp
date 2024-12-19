@@ -253,7 +253,7 @@ turn_on_robot::turn_on_robot() : rclcpp::Node("wheeltec_robot")
   }
   catch (serial::IOException &e)
   {
-    RCLCPP_ERROR(this->get_logger(), "wheeltec_robot can not open serial port,Please check the serial port cable! "); // If opening the serial port fails, an error message is printed //如果开启串口失败，打印错误信息
+    RCLCPP_ERROR(this->get_logger(), "Fail to open serial port %s: %s, please check the serial port cable!", usart_port_name.c_str(), e.what()); // If opening the serial port fails, an error message is printed //如果开启串口失败，打印错误信息
   }
   if (tankSerial.isOpen())
   {

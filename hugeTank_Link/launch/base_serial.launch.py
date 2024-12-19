@@ -16,6 +16,4 @@ def generate_launch_description():
                 'akm_cmd_vel': 'none',
                 'product_number': 0,}],
             )
-
-
   ])

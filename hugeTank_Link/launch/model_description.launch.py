@@ -12,7 +12,7 @@ def generate_robot_node(robot_urdf,child):
         package='robot_state_publisher',
         executable='robot_state_publisher',
         name=f'robot_state_publisher_{child}',
-        arguments=[os.path.join(get_package_share_directory('wheeltec_robot_urdf'), 'urdf', robot_urdf)],
+        arguments=[os.path.join(get_package_share_directory('hugetank_link'), 'urdf', robot_urdf)],
     )
 
 def generate_static_transform_publisher_node(translation, rotation, parent, child):
@@ -29,9 +29,9 @@ def generate_launch_description():
     hugeTank_Action = GroupAction(
         condition=IfCondition(hugeTank),
         actions=[
-        generate_robot_node('flagship_four_wheel_diff_dl_robot.urdf','flagship_4wheel_diff_dl'),
-        generate_static_transform_publisher_node(['0.272', '0', '0.257'], ['0', '0', '0'], 'base_footprint', 'laser'),
-        generate_static_transform_publisher_node(['0.272', '0', '0.25'], ['0', '0', '0'], 'base_footprint', 'camera_link'),    
+        generate_robot_node('huge_tank.urdf','huge_tank'),
+        generate_static_transform_publisher_node(['0.11', '0', '0.28'], ['-1.57', '0', '0'], 'base_footprint', 'laser'),
+        generate_static_transform_publisher_node(['0.2', '0', '0.22'], ['0', '0', '0'], 'base_footprint', 'camera_link'),    
     ]) 
 
      
