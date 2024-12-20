@@ -1,21 +1,12 @@
 import os
 from pathlib import Path
-import launch
-from launch.actions import SetEnvironmentVariable
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import (
-    DeclareLaunchArgument,
-    GroupAction,
-    IncludeLaunchDescription,
-    SetEnvironmentVariable,
-)
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, PythonExpression
-from launch_ros.actions import PushRosNamespace
+from launch.substitutions import LaunchConfiguration
 import launch_ros.actions
-from launch.conditions import IfCondition
-from launch.conditions import UnlessCondition
 
 
 def generate_launch_description():
@@ -39,21 +30,12 @@ def generate_launch_description():
     carto_slam_dec = DeclareLaunchArgument("carto_slam", default_value="false")
 
     serial_link = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(launch_dir, "base_serial.launch.py")
-        ),
+        PythonLaunchDescriptionSource(os.path.join(launch_dir, "base_serial.launch.py"))
     )
 
     robot_ekf = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(launch_dir, "wheeltec_ekf.launch.py")
-        ),
-        launch_arguments={"carto_slam": carto_slam}.items(),
-    )
-
-    sensors = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(launch_dir, "sensors.launch.py")
         ),
         launch_arguments={"carto_slam": carto_slam}.items(),
     )
@@ -81,6 +63,11 @@ def generate_launch_description():
         package="joint_state_publisher",
         executable="joint_state_publisher",
         name="joint_state_publisher",
+        arguments=[
+            os.path.join(
+                get_package_share_directory("hugetank_link"), "urdf", "huge_tank.urdf"
+            )
+        ],
     )
 
     tank_model = IncludeLaunchDescription(
@@ -92,7 +79,6 @@ def generate_launch_description():
 
     ld = LaunchDescription()
 
-    ld.add_action(tank_model)
     ld.add_action(carto_slam_dec)
     ld.add_action(serial_link)
     ld.add_action(base_to_link)
@@ -100,7 +86,6 @@ def generate_launch_description():
     ld.add_action(joint_state_publisher_node)
     ld.add_action(imu_filter_node)
     ld.add_action(robot_ekf)
-    ld.add_action(sensors)
-    
+    ld.add_action(tank_model)
 
     return ld

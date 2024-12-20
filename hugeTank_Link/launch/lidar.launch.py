@@ -5,7 +5,9 @@ from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 
+# def launch(launch_descriptor, argv):
 def generate_launch_description():
+    # Lidar and the PointCloud2LaserScan transformer
     lslidar_dir = get_package_share_directory("lslidar_driver")
     pc2ls_dir = get_package_share_directory("pointcloud_to_laserscan")
 
@@ -25,5 +27,4 @@ def generate_launch_description():
     ld = LaunchDescription()
     ld.add_action(lidar_launch)
     ld.add_action(point_to_scan)
-
     return ld
