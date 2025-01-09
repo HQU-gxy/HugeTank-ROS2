@@ -9,13 +9,21 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 def generate_launch_description():
     # Lidar and the PointCloud2LaserScan transformer
     lslidar_dir = get_package_share_directory("lslidar_driver")
+    unilidar_dir = get_package_share_directory("unitree_lidar_ros2")
     pc2ls_dir = get_package_share_directory("pointcloud_to_laserscan")
 
-    lidar_launch = IncludeLaunchDescription(
+    lslidar_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(lslidar_dir, "launch", "lslidar_c32_launch.py")
         )
     )
+    
+    unilidar_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(unilidar_dir, "launch.py")
+        )
+    )
+
 
     point_to_scan = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -25,6 +33,6 @@ def generate_launch_description():
 
     # Create the launch description and populate
     ld = LaunchDescription()
-    ld.add_action(lidar_launch)
+    ld.add_action(unilidar_launch)
     ld.add_action(point_to_scan)
     return ld

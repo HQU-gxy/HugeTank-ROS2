@@ -27,7 +27,7 @@ from nav2_common.launch import RewrittenYaml
 
 
 def generate_launch_description():
-    tank_nav_dir = get_package_share_directory('hugeTank_nav2')
+    tank_nav_dir = get_package_share_directory('hugetank_nav2')
     param_dir = os.path.join(tank_nav_dir, 'param')
     param_file = 'huge_tank_params.yaml'
 
