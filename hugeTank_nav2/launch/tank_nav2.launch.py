@@ -14,16 +14,16 @@ def generate_launch_description():
     tank_launch_dir = os.path.join(tank_link_dir, "launch")
 
     tank_nav_dir = get_package_share_directory("hugetank_nav2")
-    tank_nav_launchr = os.path.join(tank_nav_dir, "launch")
-
+    tank_nav_launcher = os.path.join(tank_nav_dir, "launch")
     map_dir = os.path.join(tank_nav_dir, "map")
+   
     map_file = LaunchConfiguration(
-        "map", default=os.path.join(map_dir, "shit_map.yaml")
+        "map", default=os.path.join(map_dir, "aisle.yaml")
     )
 
     param_dir = os.path.join(tank_nav_dir, "param")
     param_file = LaunchConfiguration(
-        "params", default=os.path.join(param_dir, "huge_tank_params.yaml")
+        "params", default=os.path.join(param_dir, "huge_tank_params_stupid.yaml")
     )
 
     return LaunchDescription(
@@ -54,7 +54,7 @@ def generate_launch_description():
                 ),
             ),
             IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([tank_nav_launchr, "/bringup_launch.py"]),
+                PythonLaunchDescriptionSource([tank_nav_launcher, "/bringup_launch.py"]),
                 launch_arguments={
                     "map": map_file,
                     "use_sim_time": use_sim_time,
